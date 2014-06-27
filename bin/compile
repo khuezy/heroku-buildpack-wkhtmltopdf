@@ -39,3 +39,8 @@ curl $WKHTMLTOPDF_SOURCE -o $WKHTMLTOPDF_PATH
 
 echo "-----> Extracting the tar.gz file"
 tar -zxvf $WKHTMLTOPDF_PATH
+
+cd "$1/bin/wkhtmltopdf-0.12.1"
+make
+
+make install
