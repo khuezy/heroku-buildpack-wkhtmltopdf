@@ -7,3 +7,8 @@ This buildpack downloads a precompiled binary and puts it in the path.  The vers
 
 Here is the link to the binary that is used:
 http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2
+
+Here is a list of available binaries that you can use as substitutes:
+https://code.google.com/p/wkhtmltopdf/downloads/list?can=1&q=wkhtmltopdf%20amd64%20static&colspec=Filename%20Summary%20Uploaded%20ReleaseDate%20Size%20DownloadCount
+
+It seems like they no longer precompile new versions and make them available since moving to github.  If that is not true, please help out by updating this readme and forking the project to include the most recent version.
