@@ -4,6 +4,15 @@ set -e
 
 mkdir -p "$1/bin/"
 
+function error() {
+  echo " !     $*" >&2
+  exit 1
+}
+
+function topic() {
+  echo "-----> $*"
+}
+
 WKHTMLTOPDF_SOURCE="http://ubuntu.cs.utah.edu/ubuntu/pool/universe/w/wkhtmltopdf/wkhtmltopdf_0.12.0-2_amd64.deb"
 WKHTMLTOPDF_PATH="$1/bin/wkhtmltopdf.deb"
 
@@ -13,6 +22,23 @@ curl $WKHTMLTOPDF_SOURCE -o $WKHTMLTOPDF_PATH
 echo "-----> Setting permissions"
 chmod +x $WKHTMLTOPDF_PATH
 
-dpkg -x "$1/bin/wkhtmltopdf.deb"
 
-exit 0
+topic "Writing profile script"
+mkdir -p $BUILD_DIR/.profile.d
+cat <<EOF >$BUILD_DIR/.profile.d/000_dpkg.sh
+export PATH="\$HOME/.dpkg/usr/bin:$PATH"
+export LD_LIBRARY_PATH="\$HOME/.dpkg/usr/lib:\$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="\$HOME/.dpkg/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="\$HOME/.dpkg/lib:\$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="\$HOME/.dpkg/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="\$HOME/.dpkg/lib64:\$LD_LIBRARY_PATH"
+export INCLUDE_PATH="\$HOME/.dpkg/usr/include:\$INCLUDE_PATH"
+export CPATH="\$INCLUDE_PATH"
+export CPPPATH="\$INCLUDE_PATH"
+EOF
+
+
+dpkg -x "$1/bin/wkhtmltopdf.deb" $BUILD_DIR/.dpkg/
+
+export HOME=$BUILD_DIR
+sh $HOME/.profile.d/000_dpkg.sh
