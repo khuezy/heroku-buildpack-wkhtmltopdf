@@ -18,8 +18,8 @@ source $bp_dir/bin/common.sh
 
 download () {
   status "Downloading and installing wkhtmltopdf"
-  wkhtmltopdf_url="https://codeload.github.com/wkhtmltopdf/wkhtmltopdf/tar.gz/0.12.1"
-  curl $wkhtmltopdf_url -s -o - | tar xzvf - -C $build_dir
+  wkhtmltopdf_url="http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2"
+  curl $wkhtmltopdf_url -s -o - | tar xvjf - -C $build_dir
 }
 
 install () {
@@ -29,13 +29,8 @@ install () {
 	  download
   	  mkdir -p $build_dir/vendor/bin
 	  mv $build_dir/0.12.1 $build_dir/vendor/wkhtmltopdf
-	  cd $build_dir/vendor/wkhtmltopdf
-	  status "Configuring wkhtmltopdf"
-	  ./configure   >/dev/null 2>&1
-	  status "Make!"
-	  make  >/dev/null 2>&1
-	  status "Make install !!!"
-	  make install  >/dev/null 2>&1
+	  # chown root:root $build_dir/vendor/wkhtmltopdf
+	  chmod +x $build_dir/vendor/wkhtmltopdf
 	fi
 }
 
