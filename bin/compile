@@ -28,7 +28,7 @@ install () {
 	else
 	  download
   	  mkdir -p $build_dir/vendor/bin
-	  mv $build_dir/0.12.1 $build_dir/vendor/wkhtmltopdf
+	  mv $build_dir/wkhtmltopdf-amd64 $build_dir/vendor/wkhtmltopdf
 	  # chown root:root $build_dir/vendor/wkhtmltopdf
 	  chmod +x $build_dir/vendor/wkhtmltopdf
 	fi
