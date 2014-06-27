@@ -13,6 +13,6 @@ curl $WKHTMLTOPDF_SOURCE -o $WKHTMLTOPDF_PATH
 echo "-----> Setting permissions"
 chmod +x $WKHTMLTOPDF_PATH
 
-dpkg -i "$1/bin/wkhtmltopdf.deb"
+dpkg -x "$1/bin/wkhtmltopdf.deb"
 
 exit 0
