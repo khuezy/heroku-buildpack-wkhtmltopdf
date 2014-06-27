@@ -32,7 +32,7 @@ function indent() {
 }
 
 WKHTMLTOPDF_SOURCE="http://ubuntu.cs.utah.edu/ubuntu/pool/universe/w/wkhtmltopdf/wkhtmltopdf_0.12.0-2_amd64.deb"
-WKHTMLTOPDF_PATH="$1/bin/wkhtmltopdf.deb"
+WKHTMLTOPDF_PATH="$1/bin/wkhtmltopdf_0.12.0-2_amd64.deb"
 
 echo "-----> Transferring wkhtmltopdf binary"
 curl $WKHTMLTOPDF_SOURCE -o $WKHTMLTOPDF_PATH
@@ -40,7 +40,8 @@ curl $WKHTMLTOPDF_SOURCE -o $WKHTMLTOPDF_PATH
 echo "-----> Setting permissions"
 chmod +x $WKHTMLTOPDF_PATH
 
-dpkg -x "$1/bin/wkhtmltopdf.deb" $BUILD_DIR/.dpkg/
+echo "-----> Extracting Debs"
+dpkg -x "$1/bin/wkhtmltopdf_0.12.0-2_amd64.deb" $BUILD_DIR/.dpkg/
 
 export HOME=$BUILD_DIR
 sh $HOME/.profile.d/000_dpkg.sh
