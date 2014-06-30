@@ -16,11 +16,11 @@ source $bp_dir/bin/common.sh
 download () {
   status "Downloading and installing wkhtmltopdf"
   wkhtmltopdf_url="https://github.com/h4cc/wkhtmltopdf-amd64/blob/0.12.0/bin/wkhtmltopdf-amd64?raw=true"
-  curl -L -O $wkhtmltopdf_url -s -o $build_dir/wkhtmltopdf-amd64
+  curl -L $wkhtmltopdf_url -s -o $build_dir/wkhtmltopdf-amd64
 }
 
 install () {
-	if [ -f $build_dir/vendor/bin/wkhtmltopdf ]; then
+	if [ -f $build_dir/vendor/wkhtmltopdf ]; then
 	  exit 0
 	else
 	  download
