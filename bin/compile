@@ -14,19 +14,21 @@ bp_dir=$(cd $(dirname $0); cd ..; pwd)
 source $bp_dir/bin/common.sh
 
 download () {
-  status "Downloading and installing wkhtmltopdf..."
+  status "Downloading and installing wkhtmltopdf"
   wkhtmltopdf_url="https://raw.githubusercontent.com/generalui/wkhtmltopdf-amd64/0.12.1/bin/wkhtmltopdf-amd64"
   curl -L $wkhtmltopdf_url -o $build_dir/wkhtmltopdf
 }
 
 install () {
-	if [ -f $build_dir/vendor/wkhtmltopdf ]; then
+	if [ -f $build_dir/vendor/bin/wkhtmltopdf ]; then
+	  echo "already have wkhtmltopdf, exit 0"
 	  exit 0
 	else
 	  download
   	  mkdir -p $build_dir/vendor/bin
 	  mv $build_dir/wkhtmltopdf $build_dir/vendor/bin/wkhtmltopdf
 	  chmod +x $build_dir/vendor/bin/wkhtmltopdf
+	  wkhtmltopdf
 	fi
 }
 
@@ -36,7 +38,7 @@ status "Writing profile script"
 mkdir -p $build_dir/.profile.d
 
 cat <<EOF >$build_dir/.profile.d/000_wkhtmltopdf.sh
-export PATH=$HOME/vendor/bin:$PATH
+export PATH="\$HOME/vendor/bin:$PATH"
 EOF
 
 exit 0
