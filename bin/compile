@@ -16,7 +16,7 @@ source $bp_dir/bin/common.sh
 download () {
   status "Downloading and installing wkhtmltopdf"
   wkhtmltopdf_url="https://raw.githubusercontent.com/generalui/wkhtmltopdf-amd64/0.12.1/bin/wkhtmltopdf-amd64"
-  curl -L $wkhtmltopdf_url -s -o $build_dir/wkhtmltopdf-amd64
+  curl -L $wkhtmltopdf_url -s -o $build_dir/wkhtmltopdf
 }
 
 install () {
@@ -25,7 +25,7 @@ install () {
 	else
 	  download
   	  mkdir -p $build_dir/vendor/bin
-	  mv $build_dir/wkhtmltopdf-amd64 $build_dir/vendor/bin/wkhtmltopdf
+	  mv $build_dir/wkhtmltopdf $build_dir/vendor/bin/wkhtmltopdf
 	  chmod +x $build_dir/vendor/bin/wkhtmltopdf
 	fi
 }
