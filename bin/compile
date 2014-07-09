@@ -14,7 +14,7 @@ bp_dir=$(cd $(dirname $0); cd ..; pwd)
 source $bp_dir/bin/common.sh
 
 download () {
-  status "Downloading and installing wkhtmltopdf"
+  status "Downloading and installing wkhtmltopdf..."
   wkhtmltopdf_url="https://raw.githubusercontent.com/generalui/wkhtmltopdf-amd64/0.12.1/bin/wkhtmltopdf-amd64"
   curl -L $wkhtmltopdf_url -s -o $build_dir/wkhtmltopdf
 }
